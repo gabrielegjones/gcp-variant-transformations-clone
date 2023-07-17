@@ -1,5 +1,26 @@
 # GCP Variant Transforms
 
+## Resources from Randi
+SPRO https://docs.google.com/presentation/d/1Zrak7nj3d4OE8HSmLWFY6jqHoblP9k53LFZeK0StTyQ/edit#slide=id.g250bc7317ca_0_667
+SOW https://docs.google.com/document/d/1xEvvsQHtw61630ljrhw3_bA1YCQxHciWn2tZdTByvMg/edit
+https://github.com/googlegenomics/gcp-variant-transforms/blob/master/gcp_variant_transforms/data/sharding_configs/homo_sapiens_fixed_partitions.yaml
+https://github.com/googlegenomics/gcp-variant-transforms/tree/master
+https://cloud.google.com/life-sciences/docs/resources/public-datasets
+https://console.cloud.google.com/storage/browser/genomics-public-data/1000-genomes-phase-3;tab=objects?prefix=&forceOnObjectsSortingFiltering=false
+https://cloud.google.com/life-sciences/docs/how-tos/analyze-variants
+
+Review SPRO
+Review SOW
+Review Variant Transforms Github repo
+Practice branching to his own repo and cloning the VT repo for editing (no editing needed now, but will be needed on client side)
+Play with Variant Transforms using public dataset to load human (although this will not be human data) into BQ
+Practice loading more than once to the same tables to learn the append flag (see repo)
+Practice running sample-optimized pipeline (you will see in repo)
+Practice some SQL querying of his own datasets from running VT in BQ Console
+Grab code from a lab, if needed, to set up VertexAI Workbench notebook and connect to BQ dataset directly (wont' be able to query much from there without better understanding the data, but we can deal with that later)
+Play around with more general up-skilling in Dataflow/VertexAI/BQ as needed
+Looker Studio - that's a lay-up once you know HOW to use the domain data and when you have some data, I'm happy to request a couple of vizzes for you to practice working with the data
+
 ## Overview
 
 This is a tool for transforming and processing
@@ -97,6 +118,33 @@ docker run -v ~/.config:/root/.config \
   --temp_location "${TEMP_LOCATION}" \
   "${COMMAND}"
 ```
+
+Note that i had to run this command to make it work:
+
+```
+#!/bin/bash
+# Parameters to replace:
+GOOGLE_CLOUD_PROJECT=verdant-descent-272914
+GOOGLE_CLOUD_REGION=us-east1
+GOOGLE_CLOUD_LOCATION=us-east1
+TEMP_LOCATION=gs://variant-transformations/temp
+INPUT_PATTERN=gs://genomics-public-data/1000-genomes-phase-3/vcf/*.vcf
+OUTPUT_TABLE=verdant-descent-272914:variant_transformations.vcf
+
+COMMAND="vcf_to_bq \
+  --input_pattern ${INPUT_PATTERN} \
+  --output_table ${OUTPUT_TABLE} \
+  --job_name vcf-to-bigquery \
+  --runner DataflowRunner"
+
+docker run -v ~/.config:/root/.config \
+  gcr.io/cloud-lifesciences/gcp-variant-transforms \
+  --project "${GOOGLE_CLOUD_PROJECT}" \
+  --region "${GOOGLE_CLOUD_REGION}" \
+  --temp_location "${TEMP_LOCATION}" \
+  "${COMMAND}"
+```
+ 
 `--project`, `--region`, and `--temp_location` are required inputs. You must set all of them, unless your project and region default values
 are set in your local `gcloud` configuration. You may set the default project
 and region using the following commands:
