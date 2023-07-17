@@ -1,0 +1,29 @@
+[
+  {
+    "test_name": "report-inferred-headers",
+    "input_pattern": "gs://gcp-variant-transforms-testfiles/small_tests/infer-header-fields.vcf",
+    "report_all_conflicts": "True",
+    "report_blob_name": "temp/report_inferred_headers.tsv",
+    "runner": "DirectRunner",
+    "expected_contents": [
+      "No Header Conflicts Found.",
+      "",
+      "Inferred Headers",
+      "ID\tCategory\tProposed Resolution",
+      "AA\tINFO\tnum=. type=String",
+      "AF\tINFO\tnum=. type=Float",
+      "DB\tINFO\tnum=0 type=Flag",
+      "DP\tINFO\tnum=. type=Integer",
+      "H2\tINFO\tnum=0 type=Flag",
+      "NS\tINFO\tnum=. type=Float",
+      "SVTYPE\tINFO\tnum=. type=String",
+      "DP\tFORMAT\tnum=1 type=Float",
+      "GQ\tFORMAT\tnum=1 type=Integer",
+      "HQ\tFORMAT\tnum=. type=Integer",
+      "",
+      "No Malformed Records Found.",
+      "",
+      ""
+    ]
+  }
+]
