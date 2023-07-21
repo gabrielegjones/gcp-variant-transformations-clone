@@ -79,6 +79,7 @@ function main {
   # If missing, we will try to find the default values.
   google_cloud_project="${google_cloud_project:-$(gcloud config get-value project)}"
   region="${region:-$(gcloud config get-value compute/region)}"
+  #change to run my container image
   vt_docker_image="${vt_docker_image:-gcr.io/cloud-lifesciences/gcp-variant-transforms}"
   sdk_container_image="${sdk_container_image:-gcr.io/cloud-lifesciences/variant-transforms-custom-runner:latest}"
 
