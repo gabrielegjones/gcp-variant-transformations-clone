@@ -71,6 +71,13 @@ function parse_args {
 }
 
 function main {
+  echo "echo $1"
+  echo $1e
+  echo "echo $@"
+  echo $@
+  echo "this will not exit with exit 1"
+  exit 1
+  #should this be exit 1 or exit 0?
   if [[ $1 == /opt/gcp_variant_transforms/bin/* ]]; then
     exec $@
   fi
