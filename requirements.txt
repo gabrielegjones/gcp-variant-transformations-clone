@@ -1,5 +1,5 @@
-pysam<0.16.0
-cython>=0.28.1
+pysam==0.15.4
+cython==0.29.12
 setuptools
 #warning on apache-beam: https://cloud.google.com/dataflow/docs/guides/common-errors
 apache-beam[gcp]==2.37.0 
