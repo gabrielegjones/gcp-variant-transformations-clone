@@ -16,7 +16,7 @@
 
 The 4.2 spec is available at https://samtools.github.io/hts-specs/VCFv4.2.pdf.
 """
-
+import sys
 import subprocess
 
 # implement pip as a subprocess:
