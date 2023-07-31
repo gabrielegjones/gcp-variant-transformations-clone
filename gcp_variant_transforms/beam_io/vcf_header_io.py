@@ -14,6 +14,30 @@
 
 """A source for reading VCF file headers."""
 
+import sys
+import subprocess
+
+# implement pip as a subprocess:
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','cython==0.29.12'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','pysam'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','apache-beam[gcp]==2.37.0'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','avro-python3==1.10.2'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','google-cloud-core'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','google-api-python-client>=1.6,<1.7.12'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','intervaltree>=2.1.0,<2.2.0'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','mmh3<2.6'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','mock==4.0.3'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','google-cloud-storage'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','pyfarmhash'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','pyyaml==5.4.1'])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install','nose>=1.0'])
+
+# process output with an API in the subprocess module:
+reqs = subprocess.check_output([sys.executable, '-m', 'pip',
+'freeze'])
+installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
+
+print(installed_packages)
 
 import collections
 from functools import partial
