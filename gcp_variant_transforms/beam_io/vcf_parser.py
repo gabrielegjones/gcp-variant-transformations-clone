@@ -17,7 +17,18 @@
 The 4.2 spec is available at https://samtools.github.io/hts-specs/VCFv4.2.pdf.
 """
 
+import subprocess
 
+# implement pip as a subprocess:
+subprocess.check_call([sys.executable, '-m', 'pip', 'install',
+'pysam'])
+
+# process output with an API in the subprocess module:
+reqs = subprocess.check_output([sys.executable, '-m', 'pip',
+'freeze'])
+installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
+
+print(installed_packages)
 
 from collections import namedtuple
 import enum
